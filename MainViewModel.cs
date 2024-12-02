@@ -13,7 +13,7 @@ namespace DataGridDynamicTest
     public class MainViewModel : INotifyPropertyChanged
     {
 
-        public ObservableCollection<dynamic> Dynamos { get; set; }
+        public ObservableCollection<DynamicModelWrapper> Dynamos { get; set; }
 
         public List<SomeModelItem> Items { get; set; }
 
@@ -23,7 +23,7 @@ namespace DataGridDynamicTest
 
         public MainViewModel()
         {
-            Dynamos = new ObservableCollection<dynamic>();
+            Dynamos = new ObservableCollection<DynamicModelWrapper>();
             Items = new List<SomeModelItem>();
 
             ResetTheList();
@@ -65,23 +65,23 @@ namespace DataGridDynamicTest
                 new SomeOtherModel {SomeInt1 = 4},
             };
 
-            var dinamics = DynamicFactory.CreateDynamicObjects(Items);
+            var dynamics = DynamicFactory.CreateDynamicObjects(Items);
 
-            for (int i = 0; i < dinamics.Count; i++)
+            for (int i = 0; i < dynamics.Count; i++)
             {
-                var dyn = dinamics[i] as DynamicModelWrapper;
+                var dyn = dynamics[i] as DynamicModelWrapper;
 
                 var item = OtherItems[i];
 
                 var propName = nameof(item.SomeInt1);
 
 
-                dyn.AddProperty(OtherItems[i], propName);
+                dyn.AddProperty(OtherItems[i], propName, propName);
             }
 
 
 
-            Dynamos = new(dinamics);
+            Dynamos = new(dynamics);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
         }
     }

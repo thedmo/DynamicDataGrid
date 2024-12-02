@@ -22,9 +22,9 @@ namespace DataGridDynamicTest
             );
         }
 
-        public static List<dynamic> CreateDynamicObjects<T>(List<T> items)
+        public static List<DynamicModelWrapper> CreateDynamicObjects<T>(List<T> items)
         {
-            return items.Select(item => new DynamicModelWrapper(item)).Cast<dynamic>().ToList();
+            return items.Select(item => new DynamicModelWrapper(item)).Cast<DynamicModelWrapper>().ToList();
         }
     }
 }

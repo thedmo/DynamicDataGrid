@@ -21,8 +21,9 @@ namespace DataGridDynamicTest
 
         private bool isChecked;
         private string name = "";
+		private SomeEnum someEnum;
 
-        public bool IsChecked
+		public bool IsChecked
         {
             get { return isChecked; }
             set
@@ -44,9 +45,15 @@ namespace DataGridDynamicTest
             }
         }
 
-        public SomeEnum SomeEnum { get; set; }
+		public SomeEnum SomeEnum { 
+            get => someEnum;
+            set { 
+                someEnum = value;
+                someValueChanged(value);
+            }
+        }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
